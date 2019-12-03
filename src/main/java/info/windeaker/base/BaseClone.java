@@ -1,16 +1,24 @@
-package info.windeaker;
+package info.windeaker.base;
 
-import info.windeaker.base.BaseClone;
+public class BaseClone implements Cloneable {
+    int a ;
+    public BaseClone( int a){
+        this.a=a;
+    }
 
-import java.util.ArrayList;
-import java.util.HashMap;
+    @Override
+    public BaseClone clone() throws CloneNotSupportedException {
+        return (BaseClone)super.clone();
+    }
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
+    public int getA() {
+        return a;
+    }
+
+    public void setA(int a) {
+        this.a = a;
+    }
+
     public static void main( String[] args ) throws CloneNotSupportedException {
         BaseClone baseClone=new BaseClone(2);
         System.out.println("origin"+baseClone.getA());
@@ -20,6 +28,4 @@ public class App
         System.out.println("after origin"+baseClone.getA());
         System.out.println("after clone"+cloneClass.getA());
     }
-
-
 }
