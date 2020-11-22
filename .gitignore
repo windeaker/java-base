@@ -1,2 +1,4 @@
 /jbase.iml
 /.idea/
+/target/
+*.iml

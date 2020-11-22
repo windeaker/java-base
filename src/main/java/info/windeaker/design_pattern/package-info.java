@@ -1,0 +1,1 @@
+package info.windeaker.design_pattern;
