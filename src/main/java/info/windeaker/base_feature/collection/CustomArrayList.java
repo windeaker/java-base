@@ -26,6 +26,18 @@ public class CustomArrayList<E>
     private int size;
 
 
+    /**
+     * Shared empty array instance used for empty instances.
+     */
+    private static final Object[] EMPTY_ELEMENTDATA = {};
+
+    /**
+     * Shared empty array instance used for default sized empty instances. We
+     * distinguish this from EMPTY_ELEMENTDATA to know how much to inflate when
+     * first element is added.
+     */
+    private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
+
 
     public CustomArrayList(){
 
@@ -34,12 +46,22 @@ public class CustomArrayList<E>
 
     @Override
     public E get(int index) {
-        return null;
+        checkRange(index);
+        return (E)elementData[index];
     }
+
+    public void checkRange(int index){
+        if (index<0||index>=size){
+            throw new ArrayIndexOutOfBoundsException("");
+        }
+    }
+
 
     @Override
     public E set(int index, E element) {
-        return null;
+        E result=get(index);
+        elementData[index]=element;
+        return result;
     }
 
     @Override
@@ -47,19 +69,53 @@ public class CustomArrayList<E>
 
     }
 
+    private static int calculateCapacity(Object[] elementData, int minCapacity) {
+        if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
+            return Math.max(DEFAULT_CAPACITY, minCapacity);
+        }
+        return minCapacity;
+    }
+
     @Override
     public E remove(int index) {
-        return null;
+        E result=get(index);
+        return result;
     }
 
     @Override
     public int indexOf(Object o) {
-        return 0;
+        if (o==null){
+            for (int i = 0; i < elementData.length; i++) {
+                if (elementData[i]==null){
+                    return i;
+                }
+            }
+        }else{
+            for (int i = 0; i < elementData.length; i++) {
+                if (o.equals(elementData[i])){
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        if (o==null){
+            for (int i = elementData.length-1; i >= 0; i--) {
+                if (elementData[i]==null){
+                    return i;
+                }
+            }
+        }else{
+            for (int i = elementData.length-1; i >= 0; i--) {
+                if (o.equals(elementData[i])){
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
 
     @Override
@@ -99,17 +155,17 @@ public class CustomArrayList<E>
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size==0;
     }
 
     @Override
     public boolean contains(Object o) {
-        return false;
+        return indexOf(o)==-1;
     }
 
     @Override
@@ -129,12 +185,26 @@ public class CustomArrayList<E>
 
     @Override
     public boolean add(E e) {
-        return false;
+
+        elementData[size++]=e;
+        return true;
     }
 
     @Override
     public boolean remove(Object o) {
-        return false;
+        if (o==null){
+            for (int i = 0; i < elementData.length; i++) {
+                if (elementData[i]==null){
+                }
+            }
+        }else{
+            for (int i = 0; i < elementData.length; i++) {
+                if (o.equals(elementData[i])){
+                }
+            }
+        }
+
+        return true;
     }
 
     @Override
