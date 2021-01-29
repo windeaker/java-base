@@ -1,6 +1,10 @@
 package info.windeaker.new_feature.jdk8.lamda;
 
 
+/**
+ * @author windeaker
+ * @description lamda表达式用法
+ */
 public class LamdaUsage {
     public static void main(String[] args) {
         NoReturnMultiParam noReturnMultiParam=(int a,int b)->{
